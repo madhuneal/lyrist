@@ -16,10 +16,10 @@ process.stdin.on('data', function(data) {
 
 	// Separate artist and song title
 	data = data.replace(/\n/, '').split(' - ')
-	var queryUrl = 'http://lyrics.wikia.com/api.php?artist=' + data[0] + '&song=' + data[1] + '&fmt=xml'
+	var queryUrl = 'http://lyrics.wikia.com/api.php?artist=' + encodeURIComponent(data[0]) + '&song=' + encodeURIComponent(data[1]) + '&fmt=xml'
 
 	// Query using LyricWiki's API
-	request.get(encodeURI(queryUrl), function (error, response, body) {
+	request.get(queryUrl, function (error, response, body) {
 
 		var matches
 
