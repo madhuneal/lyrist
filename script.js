@@ -64,7 +64,7 @@ process.stdin.on('data', function(data) {
 			var $div = $('<div></div>')
 			$div.text(html.replace(/<br>/gi, '\n'))
 
-			process.stdout.write(song + ' by ' + artist + '\n\n')
+			process.stdout.write('\033[94m' + song + '\033[0m by \033[94m' + artist + '\033[0m\n\n')
 			process.stdout.write($div.text())
 		})
 	})
