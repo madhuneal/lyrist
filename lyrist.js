@@ -67,14 +67,23 @@ process.stdin.on('data', function(data) {
 			return
 		}
 
-		// Fetch the lyrics page and get the actual lyrics from it
+		// Fetch the lyrics page and scrape the actual lyrics from it
 		request.get(lyricsUrl, function (error, response, body) {
 
 			var $ = cheerio.load(body)
 
 			// Remove extra non-lyrics text
-			$('.lyricbox').find('div').remove()
-			var html = $('.lyricbox').html()
+			$lyricbox = $('.lyricbox')
+			$lyricbox.find('div').remove()
+
+			// Find first lyrics element that actually has something in
+			// it, otherwise use the last element
+			var i = 0
+			while ($lyricbox.eq(i).text().replace(/\s+/, '') === '' && i < $lyricbox.length) {
+				i++
+			}
+
+			var html = $lyricbox.eq(i).html()
 			html = html.substring(0, html.indexOf('<!--'))
 
 			var $div = $('<div></div>')
