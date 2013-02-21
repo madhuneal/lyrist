@@ -11,9 +11,14 @@ process.stdin.on('data', function(data) {
 	// Remove newline from data, if any
 	data = data.replace(/\n/, '');
 
-	// Check that a song is actually playing
+	// Check that iTunes is running and that a song is playing
+	if (data == 'NOT_RUNNING') {
+		process.stdout.write('iTunes is not running.')
+		return
+	}
+
 	if (data == 'STOPPED') {
-		process.stdout.write('There is no song playing in iTunes.');
+		process.stdout.write('There is no song playing in iTunes.')
 		return
 	}
 
