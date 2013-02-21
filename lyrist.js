@@ -11,7 +11,8 @@ process.stdin.on('data', function(data) {
 	// Remove newline from data, if any
 	data = data.replace(/\n/, '');
 
-	// Check that iTunes is running and that a song is playing
+	// Check that iTunes is running, that a song is playing and that
+	// an artist name and song title were passed in
 	if (data == 'NOT_RUNNING') {
 		process.stdout.write('iTunes is not running.')
 		return
@@ -22,17 +23,18 @@ process.stdin.on('data', function(data) {
 		return
 	}
 
-	// Check that an artist and song were passed in
-	if (data.indexOf(' - ') === -1) {
-		process.stdout.write('That does not seem to be a song.\n')
+	// Parse artist and song title
+	var trackInfo = data.split(/@(?:artist|song)=/)
+	trackInfo.shift()
+
+	if (trackInfo.length !== 2) {
+		process.stdout.write('That does not look like a valid artist and song title.\n')
 		return
 	}
 
-	// Separate artist and song title
-	data = data.split(' - ')
-	var queryUrl = 'http://lyrics.wikia.com/api.php?artist=' + encodeURIComponent(data[0]) + '&song=' + encodeURIComponent(data[1]) + '&fmt=xml'
+	// All is good if we got this far; query using LyricWiki's API
+	var queryUrl = 'http://lyrics.wikia.com/api.php?artist=' + encodeURIComponent(trackInfo[0]) + '&song=' + encodeURIComponent(trackInfo[1]) + '&fmt=xml'
 
-	// Query using LyricWiki's API
 	request.get(queryUrl, function (error, response, body) {
 
 		var matches
