@@ -8,6 +8,15 @@ process.stdin.setEncoding('utf8');
 // AppleScript)
 process.stdin.on('data', function(data) {
 
+	// Remove newline from data, if any
+	data = data.replace(/\n/, '');
+
+	// Check that a song is actually playing
+	if (data == 'STOPPED') {
+		process.stdout.write('There is no song playing in iTunes.');
+		return
+	}
+
 	// Check that an artist and song were passed in
 	if (data.indexOf(' - ') === -1) {
 		process.stdout.write('That does not seem to be a song.\n')
@@ -15,7 +24,7 @@ process.stdin.on('data', function(data) {
 	}
 
 	// Separate artist and song title
-	data = data.replace(/\n/, '').split(' - ')
+	data = data.split(' - ')
 	var queryUrl = 'http://lyrics.wikia.com/api.php?artist=' + encodeURIComponent(data[0]) + '&song=' + encodeURIComponent(data[1]) + '&fmt=xml'
 
 	// Query using LyricWiki's API
