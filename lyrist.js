@@ -86,6 +86,8 @@ process.stdin.on('data', function(data) {
 			var html = $lyricbox.eq(i).html()
 			html = html.substring(0, html.indexOf('<!--'))
 
+			// Hacky stuff because LyricWiki seems to obfuscate lyrics
+			// somewhat using hex codes
 			var $div = $('<div></div>')
 			$div.text(html.replace(/<br>/gi, '\n'))
 
