@@ -19,11 +19,13 @@ Lyrist is really convenient for me because I always have Terminal running and on
 
 To easily run the script from anywhere, you can add an alias to it in your bash profile (located at `~/.bash_profile`; you can create it if it doesn't exist) like so:
 
-	alias lyrist="/PATH/TO/lyrist.sh"
+	alias lyrist="(cd /PATH/TO/lyrist && ./lyrist.sh)"
 
 ## Usage
 
-Using Lyrist is simple (which is kind of the whole point). When a song is playing (or paused) in iTunes, go to the terminal and type the name of the alias you just created above (`lyrist` in this case), or the full `/PATH/TO/lyrist.sh` if you didn't create an alias. Press `enter`. *Et voilà!*
+Using Lyrist is simple (which is kind of the whole point). When a song is playing (or paused) in iTunes, go to the terminal and type the name of the alias you just created above (`lyrist` in this case). Press `enter`. *Et voilà!*
+
+NB: If you didn't create an alias, navigate to the folder where you unzipped Lyrist and run `./lyrist.sh`.
 
 ## Issues and Feedback
 
