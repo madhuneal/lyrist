@@ -2,13 +2,13 @@
 
 Lyrist is a simple tool that displays the lyrics of the currently-playing iTunes track on the command line.
 
-It is OS X-only (for the moment, at least), and it fetches lyrics from [LyricWiki][].
+It is OS X-only (for the moment, at least), and uses [LyricWiki][] to find lyrics.
 
 Lyrist was born out of a desire to learn the lyrics to my favourite songs, the disinclination to open a browser every time I wanted to do so, several unsuccessful Google searches for a fuss-free app that already did this, and an evening of procrastinating on problem sets.
 
 ![Screenshot of Lyrist in action][screenshot]
 
-Lyrist is really convenient for me because I always have Terminal running and only a keystroke away (thanks to [TotalTerminal][]); YMMV.
+The terminal is always just a keystroke away on my setup (thanks to [TotalTerminal][]), which makes Lyrist *very* convenient for me; YMMV.
 
 ## Installation
 
@@ -29,7 +29,7 @@ NB: If you didn't create an alias, navigate to the folder where you unzipped Lyr
 
 ## Issues and Feedback
 
-I'd love any feedback you have. Please report bugs and give suggestions or comments using the [Issues][] tab above.
+I'd love any feedback you have. Use the [Issues][] tab to report bugs and give suggestions.
 
 [LyricWiki]: http://lyrics.wikia.com/Lyrics_Wiki
 [TotalTerminal]: http://totalterminal.binaryage.com/
