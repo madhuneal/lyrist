@@ -1,15 +1,15 @@
 var request = require('request')
 var cheerio = require('cheerio')
 
-process.stdin.resume();
-process.stdin.setEncoding('utf8');
+process.stdin.resume()
+process.stdin.setEncoding('utf8')
 
 // Get data from stdin (pipe artist name and song title from
 // AppleScript)
 process.stdin.on('data', function(data) {
 
 	// Remove newline from data, if any
-	data = data.replace(/\n/, '');
+	data = data.replace(/\n/, '')
 
 	// Check that iTunes is running, that a song is playing and that
 	// an artist name and song title were passed in
@@ -95,4 +95,4 @@ process.stdin.on('data', function(data) {
 			process.stdout.write($div.text())
 		})
 	})
-});
+})
