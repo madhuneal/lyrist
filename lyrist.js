@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // Lyrist
 // (c) 2013 Sahil Bajaj. Released under the MIT License.
 //
