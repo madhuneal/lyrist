@@ -1,3 +1,8 @@
+-- Lyrist
+-- (c) 2013 Sahil Bajaj. Released under the MIT License.
+--
+-- lyrist.applescript
+
 on appIsRunning(appName)
 	tell application "System Events" to (name of processes) contains appName
 end appIsRunning

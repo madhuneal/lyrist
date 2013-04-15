@@ -1,3 +1,8 @@
+// Lyrist
+// (c) 2013 Sahil Bajaj. Released under the MIT License.
+//
+// lyrist.js
+
 var request = require('request')
 var cheerio = require('cheerio')
 
