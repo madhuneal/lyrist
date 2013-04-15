@@ -3,15 +3,17 @@
 //
 // lyrist.js
 
+var exec = require('child_process').exec
 var request = require('request')
 var cheerio = require('cheerio')
 
-process.stdin.resume()
-process.stdin.setEncoding('utf8')
+// Get artist name and song title from AppleScript
+exec('osascript ' + __dirname + '/lyrist.scpt', function (error, data) {
 
-// Get data from stdin (pipe artist name and song title from
-// AppleScript)
-process.stdin.on('data', function(data) {
+	if (error) {
+		console.log(error)
+		process.exit(1)
+	}
 
 	// Remove newline from data, if any
 	data = data.replace(/\n/, '')
