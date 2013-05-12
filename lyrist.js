@@ -42,7 +42,10 @@ exec('osascript ' + __dirname + '/lyrist.scpt', function (error, data) {
 	}
 
 	// All is good if we got this far; query using LyricWiki's API
-	var queryUrl = 'http://lyrics.wikia.com/api.php?artist=' + encodeURIComponent(trackInfo[0]) + '&song=' + encodeURIComponent(trackInfo[1]) + '&fmt=xml'
+	var queryUrl =
+		'http://lyrics.wikia.com/api.php?artist=' + encodeURIComponent(trackInfo[0]) +
+		'&song=' + encodeURIComponent(trackInfo[1]) +
+		'&fmt=xml'
 
 	request.get(queryUrl, function (error, response, body) {
 
