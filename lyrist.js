@@ -8,38 +8,64 @@
 var exec = require('child_process').exec
 var request = require('request')
 var cheerio = require('cheerio')
+var Q = require('q')
 
-// Get artist name and song title from AppleScript
-exec('osascript ' + __dirname + '/lyrist.scpt', function (error, data) {
+function getTrackInfo() {
 
-	if (error) {
-		console.log(error)
-		process.exit(1)
+	var trackInfoDeferred = Q.defer()
+
+	if (process.argv.length > 2) {
+		// console.log(process.argv)
+		// process.exit()
+		var trackInfo = process.argv[2].split(/\s+-\s+/)
+		trackInfoDeferred.resolve(trackInfo)
+
+		return trackInfoDeferred.promise
 	}
 
-	// Remove newline from data, if any
-	data = data.replace(/\n/, '')
+	// Get artist name and song title from AppleScript
+	exec('osascript ' + __dirname + '/lyrist.scpt', function (error, data) {
 
-	// Check that iTunes is running, that a song is playing and that
-	// an artist name and song title were passed in
-	if (data == 'NOT_RUNNING') {
-		process.stdout.write('iTunes is not running.')
-		return
-	}
+		if (error) {
+			trackInfoDeferred.reject()
+			console.log(error)
+			process.exit(1)
+		}
 
-	if (data == 'STOPPED') {
-		process.stdout.write('There is no song playing in iTunes.')
-		return
-	}
+		// Remove newline from data, if any
+		data = data.replace(/\n/, '')
 
-	// Parse artist and song title
-	var trackInfo = data.split(/@(?:artist|song)=/)
-	trackInfo.shift()
+		// Check that iTunes is running, that a song is playing and that
+		// an artist name and song title were passed in
+		if (data == 'NOT_RUNNING') {
+			process.stdout.write('iTunes is not running.')
+			trackInfoDeferred.reject()
+			return trackInfoDeferred.promise
+		}
 
-	if (trackInfo.length !== 2) {
-		process.stdout.write('That does not look like a valid artist and song title.\n')
-		return
-	}
+		if (data == 'STOPPED') {
+			process.stdout.write('There is no song playing in iTunes.')
+			trackInfoDeferred.reject()
+			return trackInfoDeferred.promise
+		}
+
+		// Parse artist and song title
+		var trackInfo = data.split(/@(?:artist|song)=/)
+		trackInfo.shift()
+
+		if (trackInfo.length !== 2) {
+			process.stdout.write('That does not look like a valid artist and song title.\n')
+			trackInfoDeferred.reject()
+			return trackInfoDeferred.promise
+		}
+
+		trackInfoDeferred.resolve(trackInfo)
+	})
+
+	return trackInfoDeferred.promise
+}
+
+getTrackInfo().then(function (trackInfo) {
 
 	// All is good if we got this far; query using LyricWiki's API
 	var queryUrl =
