@@ -1,2 +1,3 @@
 # Ignore AppleScript binary (use make to compile)
 lyrist.scpt
+node_modules
