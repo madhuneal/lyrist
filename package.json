@@ -1,0 +1,15 @@
+{
+	"name": "Lyrist",
+	"description": "Display the lyrics of the currently-playing iTunes track (or user-defined track) on the command line in OS X.",
+	"author": "Sahil Bajaj <code@sahil.me>",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/spinningarrow/lyrist"
+	},
+	"dependencies": {
+		"request": "2.x.x",
+		"cheerio": "0.x.x",
+		"q": "0.x.x"
+	},
+	"engine": "node >= 0.8.0"
+}
