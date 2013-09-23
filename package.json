@@ -1,6 +1,6 @@
 {
 	"name": "Lyrist",
-	"description": "Display the lyrics of the currently-playing iTunes track (or user-defined track) on the command line in OS X.",
+	"description": "Display the lyrics of the currently-playing iTunes track (or a user-defined track) on the command line.",
 	"author": "Sahil Bajaj <code@sahil.me>",
 	"repository": {
 		"type": "git",
