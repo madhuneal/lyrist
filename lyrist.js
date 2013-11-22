@@ -120,16 +120,14 @@ getTrackInfo().then(function (trackInfo) {
 				i++
 			}
 
-			var html = $lyricbox.eq(i).html()
-			html = html.substring(0, html.indexOf('<!--'))
-
 			// Hacky stuff because LyricWiki seems to obfuscate lyrics
 			// somewhat using hex codes
-			var $div = $('<div></div>')
-			$div.text(html.replace(/<br>/gi, '\n'))
+			var html = $lyricbox.eq(i).html()
+			html = html.substring(0, html.indexOf('<!--')).replace(/<br>/gi, '\n')
+			$lyricbox.html(html)
 
 			process.stdout.write('\033[94m' + song + '\033[0m by \033[94m' + artist + '\033[0m\n\n')
-			process.stdout.write($div.text())
+			process.stdout.write($lyricbox.text())
 		})
 	})
 }, function (error) {
